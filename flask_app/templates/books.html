@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>Books</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-around">
+        <div class="w-25">
+            <form action="/add_book" method="post">
+                <h1 class="bg-dark p-2 text-center text-warning">New Books</h1>
+                <div class="form-floating mb-2">
+                    <input type="text" name="title" id="floatingInput" class="form-control" placeholder="title">
+                    <label for="floatingInput" class="form-label">Title: </label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" name="num_of_pages" id="floatingInput" class="form-control" placeholder="Number of pages">
+                    <label for="floatingInput" class="form-label">Number of pages: </label>
+                </div>
+                <input type="submit" class="btn btn-warning mt-2" value="Create Book">
+            </form>
+        </div>
+        <div class="w-25">
+            <h1 class="bg-dark p-2 text-center text-warning">All Books</h1>
+            <div class="border border-dark text-center" style="height:15em; overflow: auto;">
+                {% for book in books %}
+                <ul class="list-group">
+                    <li>
+                        <a href="/books/{{book.id}}" class="link-success fs-4">{{book.title}}</a>
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
+            <a href="/authors" class="btn btn-info mt-2">Authors</a>
+        </div>
+    </div>
+</body>
+</html>
